@@ -26,9 +26,9 @@ These need separate tickets: the first is in the shared parser; the second is th
 
 The five reports the desk noted as one-day moves belong to `parser`. The counts use unique report IDs: 379 + 33 = 412.
 
-## Tickets to file
+## Tickets filed
 
-- **Shared date parser flips day-first dates** — 379 reports.
-- **Booking-v3 date hint is month-first for day-first tenants** — 33 reports.
+- [**Shared date parser flips day-first dates**](https://github.com/slawomir-t-alle/s01e03-what-it-shows/issues/1) — 379 reports.
+- [**Booking-v3 date hint is month-first for day-first tenants**](https://github.com/slawomir-t-alle/s01e03-what-it-shows/issues/2) — 33 reports.
 
 <RenderStamp {signature} />
