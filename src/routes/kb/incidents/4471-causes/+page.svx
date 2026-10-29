@@ -2,15 +2,15 @@
 layout: runbook
 title: '#4471 · two date causes'
 owner: support desk
-status: known
+status: resolved
 reviewed: 2026-10-29
-signature: slawomir-t-alle
+signature: 'v1.eyJzdWIiOiI4NTQ0IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyNTg1NzcsImV4cCI6MTc5MzM0NDk3N30.QXSSDkDNNENLMSYKl-8VBNVxfhwN-IaWU8W4SIkO7VQ'
 ---
 
 <script>
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 
-  const signature = 'slawomir-t-alle';
+  const signature = 'v1.eyJzdWIiOiI4NTQ0IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyNTg1NzcsImV4cCI6MTc5MzM0NDk3N30.QXSSDkDNNENLMSYKl-8VBNVxfhwN-IaWU8W4SIkO7VQ';
 </script>
 
 The export has 427 rows, but 15 report IDs repeat because pages overlap. Counting each ID once leaves 412 unique reports, all merged into #4471.
@@ -26,9 +26,13 @@ These need separate tickets: the first is in the shared parser; the second is th
 
 The five reports the desk noted as one-day moves belong to `parser`. The counts use unique report IDs: 379 + 33 = 412.
 
+## Engineering update · 5 October 2026
+
+The desk closed #4471. Engineering fixed the parser with `fix(dates): parse dd/mm for eu locales`. The hint was marked **won't fix** because the booking-v3 form was retired.
+
 ## Tickets filed
 
-- [**Shared date parser flips day-first dates**](https://github.com/slawomir-t-alle/s01e03-what-it-shows/issues/1) — 379 reports.
-- [**Booking-v3 date hint is month-first for day-first tenants**](https://github.com/slawomir-t-alle/s01e03-what-it-shows/issues/2) — 33 reports.
+- [**Shared date parser flips day-first dates**](https://github.com/slawomir-t-alle/s01e03-what-it-shows/issues/1) — 379 reports; closed as fixed.
+- [**Booking-v3 date hint is month-first for day-first tenants**](https://github.com/slawomir-t-alle/s01e03-what-it-shows/issues/2) — 33 reports; closed as won't fix.
 
 <RenderStamp {signature} />
