@@ -1,0 +1,34 @@
+---
+layout: runbook
+title: '#4471 · two date causes'
+owner: support desk
+status: known
+reviewed: 2026-10-29
+signature: slawomir-t-alle
+---
+
+<script>
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const signature = 'slawomir-t-alle';
+</script>
+
+The export has 427 rows, but 15 report IDs repeat because pages overlap. Counting each ID once leaves 412 unique reports, all merged into #4471.
+
+## Split by cause
+
+| Cause | Reports | Evidence |
+| --- | ---: | --- |
+| `parser` | 379 | The shared parser reads month first, while all 11 affected tenants use day-first dates. These reports came through app, email, and forms. |
+| `hint` | 33 | All reports came through booking-v3 forms in three day-first tenants. The field says `MM/DD/YYYY`, then the form reads dates in the tenant's day-first order. |
+
+These need separate tickets: the first is in the shared parser; the second is the booking-v3 field hint and interpretation mismatch. Classify by the tenant's locale and form version in `causeOf`, not the reporter's browser locale or intake tag.
+
+The five reports the desk noted as one-day moves belong to `parser`. The counts use unique report IDs: 379 + 33 = 412.
+
+## Tickets to file
+
+- **Shared date parser flips day-first dates** — 379 reports.
+- **Booking-v3 date hint is month-first for day-first tenants** — 33 reports.
+
+<RenderStamp {signature} />

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>#4471 · two date causes · support kb</title>
+  <style>
+    :root { --bg: #fbfaf7; --fg: #1d1d1b; --muted: #6b6a66; --line: #e3e0d8; --accent: #2f6f5e; --warn: #b4501f; }
+    @media (prefers-color-scheme: dark) { :root { --bg: #171716; --fg: #ecebe6; --muted: #9c9a93; --line: #34332f; --accent: #6fbfa6; --warn: #f0905d; } }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 system-ui, sans-serif; }
+    .kb { max-width: 760px; margin: 0 auto; padding: 2rem 16px 4rem; }
+    .crumb { color: var(--muted); font: 0.8rem ui-monospace, monospace; text-decoration: none; }
+    h1 { margin: 0.25rem 0 0.5rem; line-height: 1.2; }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; color: var(--muted); font-size: 0.85rem; margin: 0; }
+    .status { border: 1px solid var(--line); border-radius: 99px; padding: 0 0.6rem; }
+    main { margin-top: 2rem; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.92rem; }
+    th, td { border-bottom: 1px solid var(--line); padding: 0.45rem 0.5rem; text-align: left; vertical-align: top; }
+    code { font: 0.88em ui-monospace, monospace; }
+    a { color: var(--accent); }
+    .stamp { margin: 2rem 0 0; color: var(--muted); font: 0.85rem ui-monospace, monospace; }
+    .stamp b { color: var(--accent); letter-spacing: 0.04em; }
+    footer { margin-top: 3rem; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+  </style>
+</head>
+<body>
+  <article class="kb">
+    <header>
+      <a class="crumb" href="/kb">support desk · kb</a>
+      <h1>#4471 · two date causes</h1>
+      <p class="meta"><span>owner <b>support desk</b></span><span class="status">known</span><span>reviewed 2026-10-29</span></p>
+    </header>
+    <main>
+      <p>The export has 427 rows, but 15 report IDs repeat because pages overlap. Counting each ID once leaves 412 unique reports, all merged into #4471.</p>
+      <h2>Split by cause</h2>
+      <table>
+        <thead><tr><th>Cause</th><th>Reports</th><th>Evidence</th></tr></thead>
+        <tbody>
+          <tr><td><code>parser</code></td><td>379</td><td>The shared parser reads month first, while all 11 affected tenants use day-first dates. These reports came through app, email, and forms.</td></tr>
+          <tr><td><code>hint</code></td><td>33</td><td>All reports came through booking-v3 forms in three day-first tenants. The field says <code>MM/DD/YYYY</code>, then the form reads dates in the tenant's day-first order.</td></tr>
+        </tbody>
+      </table>
+      <p>These need separate tickets: the first is in the shared parser; the second is the booking-v3 field hint and interpretation mismatch. Classify by the tenant's locale and form version in <code>causeOf</code>, not the reporter's browser locale or intake tag.</p>
+      <p>The five reports the desk noted as one-day moves belong to <code>parser</code>. The counts use unique report IDs: 379 + 33 = 412.</p>
+      <h2>Tickets to file</h2>
+      <ul>
+        <li><strong>Shared date parser flips day-first dates</strong> — 379 reports.</li>
+        <li><strong>Booking-v3 date hint is month-first for day-first tenants</strong> — 33 reports.</li>
+      </ul>
+      <p class="stamp">desk ref <b>DR-EN4Q-AM8X</b></p>
+    </main>
+    <footer>Pages are written by people. Tables and charts are built from data at render time.</footer>
+  </article>
+</body>
+</html>
